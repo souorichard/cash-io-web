@@ -4,6 +4,7 @@ import {
   AuthPageHeader,
   AuthPageTitle,
 } from '@/components/authentication/page'
+import { SignInForm } from '@/components/authentication/sign-in-form'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 
@@ -16,6 +17,8 @@ export default function SignIn() {
           Gerencie e acompanhe suas finanças pelo sistema do parceiro
         </AuthPageDescription>
       </AuthPageHeader>
+
+      <SignInForm />
 
       <div className="flex items-center gap-3">
         <Separator className="flex-1" />
