@@ -7,6 +7,7 @@ import {
 import { SignUpForm } from '@/components/authentication/sign-up-form'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import Link from 'next/link'
 
 export default function SignUp() {
   return (
@@ -28,8 +29,8 @@ export default function SignUp() {
         <Separator className="flex-1" />
       </div>
 
-      <Button variant="outline" className="w-full">
-        Entrar com conta existente
+      <Button variant="outline" className="w-full" asChild>
+        <Link href="/auth/sign-in">Entrar com conta existente</Link>
       </Button>
     </AuthPageContent>
   )

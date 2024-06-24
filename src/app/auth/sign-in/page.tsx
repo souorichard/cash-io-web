@@ -7,6 +7,7 @@ import {
 import { SignInForm } from '@/components/authentication/sign-in-form'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import Link from 'next/link'
 
 export default function SignIn() {
   return (
@@ -28,8 +29,8 @@ export default function SignIn() {
         <Separator className="flex-1" />
       </div>
 
-      <Button variant="outline" className="w-full">
-        Crie uma nova conta
+      <Button variant="outline" className="w-full" asChild>
+        <Link href="/auth/sign-up">Crie uma nova conta</Link>
       </Button>
     </AuthPageContent>
   )
