@@ -1,9 +1,16 @@
 import { TrendingDown } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { cn } from '@/lib/utils'
 
-export function ExpenseTransactionsCard() {
+interface ExpenseTransactionsCardProps {
+  className?: string
+}
+
+export function ExpenseTransactionsCard({
+  className,
+}: ExpenseTransactionsCardProps) {
   return (
-    <Card>
+    <Card className={cn('', className)}>
       <CardHeader className="pb-3 flex-row items-center">
         <CardTitle>Despesas</CardTitle>
         <TrendingDown className="size-5 ml-auto text-red-600" />

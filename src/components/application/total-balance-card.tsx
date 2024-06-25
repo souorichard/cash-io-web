@@ -1,9 +1,14 @@
 import { Wallet2 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { cn } from '@/lib/utils'
 
-export function TotalBalanceCard() {
+interface TotalBalanceCardProps {
+  className?: string
+}
+
+export function TotalBalanceCard({ className }: TotalBalanceCardProps) {
   return (
-    <Card className="bg-card-foreground">
+    <Card className={cn('bg-card-foreground', className)}>
       <CardHeader className="pb-3 flex-row items-center">
         <CardTitle className="text-primary-foreground">Saldo total</CardTitle>
         <Wallet2 className="size-5 ml-auto text-orange-600" />

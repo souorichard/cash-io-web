@@ -1,9 +1,16 @@
 import { TrendingUp } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { cn } from '@/lib/utils'
 
-export function RevenueTransactionsCard() {
+interface RevenueTransactionsCardProps {
+  className?: string
+}
+
+export function RevenueTransactionsCard({
+  className,
+}: RevenueTransactionsCardProps) {
   return (
-    <Card>
+    <Card className={cn('', className)}>
       <CardHeader className="pb-3 flex-row items-center">
         <CardTitle>Receitas</CardTitle>
         <TrendingUp className="size-5 ml-auto text-green-600" />
