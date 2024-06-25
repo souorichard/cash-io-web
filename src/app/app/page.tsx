@@ -1,3 +1,17 @@
+import {
+  ApplicationPage,
+  ApplicationPageContent,
+  ApplicationPageHeader,
+  ApplicationPageTitle,
+} from '@/components/application/patterns/page'
+
 export default function DashboardPage() {
-  return <h1>Hello World!</h1>
+  return (
+    <ApplicationPage>
+      <ApplicationPageHeader>
+        <ApplicationPageTitle>Dashboard</ApplicationPageTitle>
+      </ApplicationPageHeader>
+      <ApplicationPageContent>teste</ApplicationPageContent>
+    </ApplicationPage>
+  )
 }

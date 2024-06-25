@@ -5,7 +5,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
   return (
     <div className="min-h-screen grid grid-rows-[auto_1fr]">
       <MainHeader />
-      {children}
+      <div className="p-8">{children}</div>
     </div>
   )
 }
