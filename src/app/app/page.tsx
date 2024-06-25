@@ -1,3 +1,4 @@
+import { ExpenseTransactionsCard } from '@/components/application/expense-transactions-card'
 import {
   ApplicationPage,
   ApplicationPageContent,
@@ -11,7 +12,11 @@ export default function DashboardPage() {
       <ApplicationPageHeader>
         <ApplicationPageTitle>Dashboard</ApplicationPageTitle>
       </ApplicationPageHeader>
-      <ApplicationPageContent>teste</ApplicationPageContent>
+      <ApplicationPageContent>
+        <div className="grid grid-cols-3 gap-x-4">
+          <ExpenseTransactionsCard />
+        </div>
+      </ApplicationPageContent>
     </ApplicationPage>
   )
 }
