@@ -1,4 +1,8 @@
-import { Logo, LogoEmblem, LogoName } from '@/components/application/logo'
+import {
+  Logo,
+  LogoEmblem,
+  LogoName,
+} from '@/components/application/patterns/logo'
 import { AuthPage } from '@/components/authentication/page'
 import { PropsWithChildren } from 'react'
 
