@@ -9,7 +9,7 @@ type HeaderGenericProps<T = unknown> = {
 
 export function Header({ className, children }: HeaderGenericProps) {
   return (
-    <header className={cn('h-20 px-4 flex items-center', className)}>
+    <header className={cn('h-20 px-4 flex items-center border-b', className)}>
       {children}
     </header>
   )
@@ -51,7 +51,7 @@ export function HeaderNavLink({
     <Link
       href={path}
       className={cn(
-        'flex items-center gap-2',
+        'flex items-center gap-2 text-sm font-medium',
         !active && 'text-muted-foreground',
         className,
       )}
