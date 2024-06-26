@@ -8,6 +8,7 @@ import { ExpenseTransactionsCard } from '@/components/application/expense-transa
 import { RevenueTransactionsCard } from '@/components/application/revenue-transactions-card'
 import { TotalBalanceCard } from '@/components/application/total-balance-card'
 import { TransactionsInPeriodCard } from '@/components/application/transactions-in-period-card'
+import { RecentTransactionsCard } from '@/components/application/recent-transactions-card'
 
 export default function DashboardPage() {
   return (
@@ -21,6 +22,7 @@ export default function DashboardPage() {
           <RevenueTransactionsCard className="col-span-1" />
           <TotalBalanceCard className="col-span-1" />
           <TransactionsInPeriodCard className="col-span-2" />
+          <RecentTransactionsCard className="col-span-1" />
         </div>
       </ApplicationPageContent>
     </ApplicationPage>
