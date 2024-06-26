@@ -17,7 +17,7 @@ export function RecentTransactionsCard({
 }: RecentTransactionsCardProps) {
   return (
     <Card className={cn('', className)}>
-      <CardHeader>
+      <CardHeader className="pb-8">
         <CardTitle>Transações recentes</CardTitle>
         <CardDescription>
           Veja as transações adicionadas recentemente

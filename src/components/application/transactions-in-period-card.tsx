@@ -73,7 +73,7 @@ export function TransactionsInPeriodCard({
 }: TransactionsInPeriodCardProps) {
   return (
     <Card className={cn('', className)}>
-      <CardHeader className="flex-row items-center">
+      <CardHeader className="flex-row items-center pb-8">
         <div className="space-y-1.5">
           <CardTitle>Transações no Período</CardTitle>
           <CardDescription>
