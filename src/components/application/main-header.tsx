@@ -30,10 +30,7 @@ export function MainHeader() {
             <LogoEmblem />
           </Link>
 
-          <Separator
-            orientation="vertical"
-            className="h-6 bg-muted-foreground"
-          />
+          <Separator orientation="vertical" className="h-6" />
 
           <HeaderNavLink path="/app" active={isActive('/app')}>
             <LayoutDashboard className="size-4" />
