@@ -10,8 +10,17 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import ErrorLabel from '../application/error-label'
 import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useMutation } from '@tanstack/react-query'
+import { signIn } from '@/api/sign-in'
+import Cookies from 'js-cookie'
 
 export function SignInForm() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const email = searchParams.get('email')
+
   const [isOcult, setIsOcult] = useState(false)
 
   const {
@@ -20,13 +29,27 @@ export function SignInForm() {
     formState: { errors, isSubmitting },
   } = useForm<SignInFormData>({
     resolver: zodResolver(signInSchema),
+    defaultValues: {
+      email: email ?? '',
+      password: '',
+    },
+  })
+
+  const { mutateAsync: loginUser } = useMutation({
+    mutationFn: signIn,
+    onSuccess: () => {
+      router.push('/app')
+    },
   })
 
   async function onSubmit(data: SignInFormData) {
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
-      console.log(data)
+      const response = await loginUser(data)
+
+      Cookies.set('userId', response.id, { expires: 3 })
+      Cookies.set('token', response.token, { expires: 3 })
 
       toast.success('Aguarde, redirecionando para o sistema...')
     } catch (err) {

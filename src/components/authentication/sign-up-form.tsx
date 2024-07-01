@@ -10,8 +10,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import ErrorLabel from '../application/error-label'
 import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useMutation } from '@tanstack/react-query'
+import { signUp } from '@/api/sign-up'
 
 export function SignUpForm() {
+  const searchParams = useSearchParams()
+  const { push } = useRouter()
+
   const [isOcult, setIsOcult] = useState(false)
 
   const {
@@ -22,15 +28,31 @@ export function SignUpForm() {
     resolver: zodResolver(signUpSchema),
   })
 
+  const { mutateAsync: registerUser } = useMutation({
+    mutationFn: signUp,
+  })
+
   async function onSubmit(data: SignUpFormData) {
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
-      console.log(data)
+      await registerUser(data)
 
-      toast.success('Cadastro efetuado com sucesso!')
+      const email = data.email
+
+      const params = new URLSearchParams(searchParams)
+      params.set('email', email)
+
+      toast.success('Cadastro efetuado com sucesso!', {
+        action: {
+          label: 'Entrar',
+          onClick: () => {
+            push(`/auth/sign-in?${params.toString()}`)
+          },
+        },
+      })
     } catch (err) {
-      toast.error('Algo deu errado, tente novamente mais tarde!')
+      toast.error('Erro ao cadastrar novo usuário!')
     }
   }
 
