@@ -15,7 +15,7 @@ import { ChevronDown, CircleUser, CreditCard, LogOut } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
-import { getProfile } from '@/api/get-profile'
+import { getProfile } from '@/api/user/get-profile'
 import Cookies from 'js-cookie'
 import { Skeleton } from '../ui/skeleton'
 

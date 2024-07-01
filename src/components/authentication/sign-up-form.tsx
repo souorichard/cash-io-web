@@ -12,7 +12,7 @@ import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useMutation } from '@tanstack/react-query'
-import { signUp } from '@/api/sign-up'
+import { signUp } from '@/api/auth/sign-up'
 
 export function SignUpForm() {
   const searchParams = useSearchParams()

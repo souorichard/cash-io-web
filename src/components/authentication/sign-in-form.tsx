@@ -12,7 +12,7 @@ import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useMutation } from '@tanstack/react-query'
-import { signIn } from '@/api/sign-in'
+import { signIn } from '@/api/auth/sign-in'
 import Cookies from 'js-cookie'
 
 export function SignInForm() {

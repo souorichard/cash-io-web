@@ -1,6 +1,11 @@
-import { TrendingDown } from 'lucide-react'
+'use client'
+
+import { Loader2, TrendingDown } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { cn } from '@/lib/utils'
+import { useQuery } from '@tanstack/react-query'
+import { getExpenseTransactions } from '@/api/analytics/get-expense-transactions'
+import { SkeletonCard } from './skeletons/skeleton-card'
 
 interface ExpenseTransactionsCardProps {
   className?: string
@@ -9,18 +14,42 @@ interface ExpenseTransactionsCardProps {
 export function ExpenseTransactionsCard({
   className,
 }: ExpenseTransactionsCardProps) {
+  const {
+    data: expenseTransactions,
+    isFetching: isLoadingExpenseTransactions,
+  } = useQuery({
+    queryKey: ['analytics', 'expense-transactions'],
+    queryFn: getExpenseTransactions,
+    refetchOnWindowFocus: false,
+  })
+
   return (
     <Card className={cn('', className)}>
       <CardHeader className="pb-3 flex-row items-center">
         <CardTitle>Despesas</CardTitle>
-        <TrendingDown className="size-5 ml-auto text-red-600" />
+        {isLoadingExpenseTransactions ? (
+          <Loader2 className="size-5 ml-auto text-muted-foreground animate-spin" />
+        ) : (
+          <TrendingDown className="size-5 ml-auto text-red-600" />
+        )}
       </CardHeader>
       <CardContent>
-        <b className="text-2xl font-bold">R$ 10.000,00</b>
-        <p className="mt-1 text-xs text-muted-foreground">
-          <span className="text-emerald-600">-20%</span> em relação ao mês
-          passado
-        </p>
+        {isLoadingExpenseTransactions ? (
+          <SkeletonCard />
+        ) : (
+          <>
+            <b className="text-2xl font-bold">
+              {expenseTransactions?.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </b>
+            <p className="mt-1 text-xs text-muted-foreground">
+              <span className="text-emerald-600">-20%</span> em relação ao mês
+              passado
+            </p>
+          </>
+        )}
       </CardContent>
     </Card>
   )
