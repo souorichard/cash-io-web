@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { SignUpFormData, signUpSchema } from '@/schemas/auth/sign-up'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
@@ -7,10 +8,12 @@ import { Label } from '../ui/label'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import ErrorLabel from '../application/error-label'
-import { Loader2 } from 'lucide-react'
+import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function SignUpForm() {
+  const [isOcult, setIsOcult] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -52,11 +55,37 @@ export function SignUpForm() {
         {errors.email && <ErrorLabel>{errors.email.message}</ErrorLabel>}
       </fieldset>
 
-      <fieldset className="col-span-full space-y-0.5">
+      <fieldset className="col-span-1 space-y-0.5">
+        <Label htmlFor="password">Senha</Label>
+        <div className="relative">
+          <Input
+            id="password"
+            type={!isOcult ? 'password' : 'text'}
+            placeholder="Digite sua senha"
+            {...register('password')}
+          />
+          <Button
+            size="icon"
+            variant="ghost"
+            type="button"
+            onClick={() => setIsOcult(!isOcult)}
+            className="absolute top-0 right-0"
+          >
+            {!isOcult ? (
+              <Eye className="size-4" />
+            ) : (
+              <EyeOff className="size-4" />
+            )}
+          </Button>
+        </div>
+        {errors.password && <ErrorLabel>{errors.password.message}</ErrorLabel>}
+      </fieldset>
+
+      <fieldset className="col-span-1 space-y-0.5">
         <Label htmlFor="phone">Celular</Label>
         <Input
           id="phone"
-          placeholder="Insira seu celular"
+          placeholder="Digite seu celular"
           {...register('phone')}
         />
         {errors.phone && <ErrorLabel>{errors.phone.message}</ErrorLabel>}
@@ -64,7 +93,7 @@ export function SignUpForm() {
 
       <Button type="submit" disabled={isSubmitting} className="col-span-full">
         {isSubmitting && <Loader2 className="size-4 mr-2 animate-spin" />}
-        {isSubmitting ? 'Acessando...' : 'Acessar sistema'}
+        {isSubmitting ? 'Cadastrando...' : 'Cadastrar no sistema'}
       </Button>
     </form>
   )

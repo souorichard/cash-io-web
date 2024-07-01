@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { SignInFormData, signInSchema } from '@/schemas/auth/sign-in'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
@@ -7,10 +8,12 @@ import { Label } from '../ui/label'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import ErrorLabel from '../application/error-label'
-import { Loader2 } from 'lucide-react'
+import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function SignInForm() {
+  const [isOcult, setIsOcult] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -44,6 +47,32 @@ export function SignInForm() {
           {...register('email')}
         />
         {errors.email && <ErrorLabel>{errors.email.message}</ErrorLabel>}
+      </fieldset>
+
+      <fieldset className="space-y-0.5">
+        <Label htmlFor="password">Senha</Label>
+        <div className="relative">
+          <Input
+            id="password"
+            type={!isOcult ? 'password' : 'text'}
+            placeholder="Digite sua senha"
+            {...register('password')}
+          />
+          <Button
+            size="icon"
+            variant="ghost"
+            type="button"
+            onClick={() => setIsOcult(!isOcult)}
+            className="absolute top-0 right-0"
+          >
+            {!isOcult ? (
+              <Eye className="size-4" />
+            ) : (
+              <EyeOff className="size-4" />
+            )}
+          </Button>
+        </div>
+        {errors.password && <ErrorLabel>{errors.password.message}</ErrorLabel>}
       </fieldset>
 
       <Button type="submit" disabled={isSubmitting}>
