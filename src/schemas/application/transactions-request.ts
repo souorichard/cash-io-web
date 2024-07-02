@@ -9,3 +9,12 @@ export const transactionsRequestQuerySchema = z.object({
 export type TransactionsRequestQueryParams = z.infer<
   typeof transactionsRequestQuerySchema
 >
+
+export const addTransactionSchema = z.object({
+  description: z.string(),
+  category: z.string(),
+  amount: z.coerce.number(),
+  type: z.string(),
+})
+
+export type AddTransactionData = z.infer<typeof addTransactionSchema>

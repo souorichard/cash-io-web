@@ -1,3 +1,5 @@
+'use client'
+
 import { CirclePlus, Loader2 } from 'lucide-react'
 import { Button } from '../ui/button'
 import {
@@ -28,6 +30,9 @@ import {
 } from '../ui/select'
 import { toast } from 'sonner'
 import ErrorLabel from './error-label'
+import { useMutation } from '@tanstack/react-query'
+import { addTransaction } from '@/api/transaction/add-transaction'
+import { queryClient } from '@/lib/react-query'
 
 export function CreateTransactionDialog() {
   const {
@@ -39,11 +44,19 @@ export function CreateTransactionDialog() {
     resolver: zodResolver(createTransactionSchema),
   })
 
-  async function onSubmit(data: CreateTransactionFormData) {
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+  const { mutateAsync: createTransaction } = useMutation({
+    mutationKey: ['transactions'],
+    mutationFn: addTransaction,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['transactions'] })
+    },
+  })
 
+  async function onSubmit(data: CreateTransactionFormData) {
     try {
-      console.log(data)
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+
+      await createTransaction(data)
 
       toast.success('Transação criada com sucesso!')
     } catch (err) {
