@@ -7,15 +7,9 @@ import { Separator } from '../ui/separator'
 import { CreateTransactionDialog } from './create-transaction-dialog'
 import { Controller, useForm } from 'react-hook-form'
 import { TransactionsFilterFormData } from '@/schemas/application/transactions-filter'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../ui/select'
+import { Select, SelectContent, SelectTrigger, SelectValue } from '../ui/select'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { CategorySelect } from './category-select'
 
 export function TransactionsTableFilter() {
   const pathname = usePathname()
@@ -90,9 +84,7 @@ export function TransactionsTableFilter() {
                   <SelectValue {...field} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="all">Todas as categorias</SelectItem>
-                  </SelectGroup>
+                  <CategorySelect onDefaultValue />
                 </SelectContent>
               </Select>
             )

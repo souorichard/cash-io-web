@@ -18,6 +18,7 @@ import { cn } from '@/lib/utils'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { deleteTransaction } from '@/api/transaction/delete-transaction'
+import { translateCategory } from '@/utils/translate-category'
 
 interface TransactionsTableRowProps {
   transaction: Transaction
@@ -35,7 +36,7 @@ export function TransactionsTableRow({
         })}
       </TableCell>
       <TableCell>{transaction.description}</TableCell>
-      <TableCell>{transaction.category}</TableCell>
+      <TableCell>{translateCategory(transaction.category)}</TableCell>
       <TableCell
         className={cn(
           'font-medium text-right',

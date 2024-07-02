@@ -33,6 +33,7 @@ import ErrorLabel from './error-label'
 import { useMutation } from '@tanstack/react-query'
 import { addTransaction } from '@/api/transaction/add-transaction'
 import { queryClient } from '@/lib/react-query'
+import { CategorySelect } from './category-select'
 
 export function CreateTransactionDialog() {
   const {
@@ -111,9 +112,7 @@ export function CreateTransactionDialog() {
                       />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="teste">Teste</SelectItem>
-                      </SelectGroup>
+                      <CategorySelect />
                     </SelectContent>
                   </Select>
                 )
