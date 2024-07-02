@@ -17,6 +17,7 @@ import { Transaction } from '@/types/transaction'
 import { cn } from '@/lib/utils'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import { deleteTransaction } from '@/api/transaction/delete-transaction'
 
 interface TransactionsTableRowProps {
   transaction: Transaction
@@ -67,6 +68,7 @@ export function TransactionsTableRow({
             dataId={transaction.id}
             title="Atenção!"
             description="Tem certeza que deseja excluir esta transação?"
+            mutation={deleteTransaction}
           />
         </AlertDialog>
       </TableCell>

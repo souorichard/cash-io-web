@@ -34,11 +34,12 @@ export function TotalBalanceCard({ className }: TotalBalanceCardProps) {
         ) : (
           <>
             <b className="text-2xl font-bold text-primary-foreground">
-              {totalBalance && totalBalance < 0 ? '- ' : ''}
-              {totalBalance?.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              })}
+              {totalBalance
+                ?.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })
+                .replace('-', '- ')}
             </b>
             <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-600">
               <span className="text-emerald-600">+20%</span> em relação ao mês
