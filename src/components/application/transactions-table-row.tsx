@@ -15,6 +15,8 @@ import { Ellipsis } from 'lucide-react'
 import { DeleteAlertDialog } from './delete-alert-dialog'
 import { Transaction } from '@/types/transaction'
 import { cn } from '@/lib/utils'
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 interface TransactionsTableRowProps {
   transaction: Transaction
@@ -25,7 +27,12 @@ export function TransactionsTableRow({
 }: TransactionsTableRowProps) {
   return (
     <TableRow>
-      <TableCell>{transaction.createdAt.toString()}</TableCell>
+      <TableCell>
+        {formatDistanceToNow(new Date(transaction.createdAt), {
+          locale: ptBR,
+          addSuffix: true,
+        })}
+      </TableCell>
       <TableCell>{transaction.description}</TableCell>
       <TableCell>{transaction.category}</TableCell>
       <TableCell

@@ -45,7 +45,7 @@ export function TransactionsTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[10rem]">Criado em</TableHead>
+              <TableHead className="w-[12rem]">Criada</TableHead>
               <TableHead>Descrição</TableHead>
               <TableHead className="w-[15rem]">Categoria</TableHead>
               <TableHead className="w-[11.25rem] text-right">Valor</TableHead>
