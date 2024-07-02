@@ -9,6 +9,15 @@ export type Transaction = {
   updatedAt: Date
 }
 
+export type TransactionsResponse = {
+  transactions: Transaction[]
+  meta: {
+    total: number
+    page: number
+    perPage: number
+  }
+}
+
 export type TransactionWithOwner = {
   id: string
   description: string

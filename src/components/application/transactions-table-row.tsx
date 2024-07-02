@@ -25,7 +25,7 @@ export function TransactionsTableRow({
 }: TransactionsTableRowProps) {
   return (
     <TableRow>
-      <TableCell>{transaction.createdAt}</TableCell>
+      <TableCell>{transaction.createdAt.toString()}</TableCell>
       <TableCell>{transaction.description}</TableCell>
       <TableCell>{transaction.category}</TableCell>
       <TableCell

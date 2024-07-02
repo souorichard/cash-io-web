@@ -6,16 +6,37 @@ import {
   TableHead,
   TableBody,
   TableRow,
+  TableCell,
 } from '@/components/ui/table'
 import { TransactionsTableRow } from '@/components/application/transactions-table-row'
 import { TransactionsTableFilter } from './transactions-table-filter'
-import { Transaction } from '@/types/transaction'
+import { useQuery } from '@tanstack/react-query'
+import { getTransactions } from '@/api/transaction/get-transactions'
+import { TransactionsTableSkeleton } from './skeletons/transactions-table-skeleton'
+import { AlertCircle } from 'lucide-react'
+import { useSearchParams } from 'next/navigation'
+import { z } from 'zod'
 
-interface TransactionsTableProps {
-  transactions: Transaction[]
-}
+export function TransactionsTable() {
+  const searchParams = useSearchParams()
 
-export function TransactionsTable({ transactions }: TransactionsTableProps) {
+  const description = searchParams.get('description')
+  const category = z
+    .string()
+    .optional()
+    .parse(searchParams.get('category') ?? 'all')
+  const page = searchParams.get('page')
+
+  const { data: result, isLoading: isLoadingTransactions } = useQuery({
+    queryKey: ['transactions', description, category, page],
+    queryFn: () =>
+      getTransactions({
+        description: description ?? '',
+        category: category === 'all' ? undefined : category,
+        page: page ?? '',
+      }),
+  })
+
   return (
     <div className="space-y-3">
       <TransactionsTableFilter />
@@ -32,12 +53,26 @@ export function TransactionsTable({ transactions }: TransactionsTableProps) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {transactions.map((transaction) => (
-              <TransactionsTableRow
-                key={transaction.id}
-                transaction={transaction}
-              />
-            ))}
+            {isLoadingTransactions && !result && <TransactionsTableSkeleton />}
+
+            {result &&
+              result.transactions.map((transaction) => (
+                <TransactionsTableRow
+                  key={transaction.id}
+                  transaction={transaction}
+                />
+              ))}
+
+            {result && result.transactions.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={5} className="py-10 text-muted-foreground">
+                  <div className="flex justify-center items-center">
+                    <AlertCircle className="size-4 mr-2" />
+                    Nenhum resultado encontrado.
+                  </div>
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </div>
