@@ -47,7 +47,7 @@ export function MainHeader() {
 
           <HeaderNavLink
             path="/app/settings"
-            active={isActive('/app/settings')}
+            active={pathname.includes('/app/settings')}
           >
             <Settings className="size-4" />
             Configurações
