@@ -1,18 +1,20 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { Eye, EyeOff, Loader2 } from 'lucide-react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+
+import { signUp } from '@/api/auth/sign-up'
 import { SignUpFormData, signUpSchema } from '@/schemas/auth/sign-up'
+
+import ErrorLabel from '../application/error-label'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import ErrorLabel from '../application/error-label'
-import { Eye, EyeOff, Loader2 } from 'lucide-react'
-import { toast } from 'sonner'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useMutation } from '@tanstack/react-query'
-import { signUp } from '@/api/auth/sign-up'
 
 export function SignUpForm() {
   const searchParams = useSearchParams()

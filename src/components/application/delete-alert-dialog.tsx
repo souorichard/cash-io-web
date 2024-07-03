@@ -1,6 +1,9 @@
 'use client'
 
+import { useMutation } from '@tanstack/react-query'
+
 import { queryClient } from '@/lib/react-query'
+
 import {
   AlertDialogAction,
   AlertDialogCancel,
@@ -10,7 +13,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '../ui/alert-dialog'
-import { useMutation } from '@tanstack/react-query'
 
 interface DeleteAlertDialogProps {
   dataId: string

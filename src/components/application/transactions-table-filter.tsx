@@ -1,15 +1,17 @@
 'use client'
 
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
 import { Search, X } from 'lucide-react'
-import { Separator } from '../ui/separator'
-import { CreateTransactionDialog } from './create-transaction-dialog'
-import { Controller, useForm } from 'react-hook-form'
-import { TransactionsFilterFormData } from '@/schemas/application/transactions-filter'
-import { Select, SelectContent, SelectTrigger, SelectValue } from '../ui/select'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Controller, useForm } from 'react-hook-form'
+
+import { TransactionsFilterFormData } from '@/schemas/application/transactions-filter'
+
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { Select, SelectContent, SelectTrigger, SelectValue } from '../ui/select'
+import { Separator } from '../ui/separator'
 import { CategorySelect } from './category-select'
+import { CreateTransactionDialog } from './create-transaction-dialog'
 
 export function TransactionsTableFilter() {
   const pathname = usePathname()

@@ -1,5 +1,6 @@
-import { api } from '@/lib/axios'
 import Cookies from 'js-cookie'
+
+import { api } from '@/lib/axios'
 
 export async function getExpenseTransactions() {
   const response = await api.get<number>('/transactions/expense', {

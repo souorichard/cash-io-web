@@ -1,6 +1,13 @@
 'use client'
 
+import { useQuery } from '@tanstack/react-query'
+import { AlertCircle, Loader2 } from 'lucide-react'
+
+import { getRecentTransactions } from '@/api/analytics/get-recent-transactions'
 import { cn } from '@/lib/utils'
+import { getInitials } from '@/utils/get-initials'
+
+import { Avatar, AvatarFallback } from '../ui/avatar'
 import {
   Card,
   CardContent,
@@ -8,11 +15,6 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card'
-import { Avatar, AvatarFallback } from '../ui/avatar'
-import { useQuery } from '@tanstack/react-query'
-import { getRecentTransactions } from '@/api/analytics/get-recent-transactions'
-import { getInitials } from '@/utils/get-initials'
-import { AlertCircle, Loader2 } from 'lucide-react'
 
 interface RecentTransactionsCardProps {
   className?: string

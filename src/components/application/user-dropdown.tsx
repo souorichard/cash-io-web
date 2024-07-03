@@ -1,6 +1,14 @@
 'use client'
 
+import { useQuery } from '@tanstack/react-query'
+import Cookies from 'js-cookie'
+import { ChevronDown, CircleUser, CreditCard, LogOut } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+
+import { getProfile } from '@/api/user/get-profile'
+import { cn } from '@/lib/utils'
+
 import { Button } from '../ui/button'
 import {
   DropdownMenu,
@@ -11,12 +19,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import { ChevronDown, CircleUser, CreditCard, LogOut } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { useRouter } from 'next/navigation'
-import { useQuery } from '@tanstack/react-query'
-import { getProfile } from '@/api/user/get-profile'
-import Cookies from 'js-cookie'
 import { Skeleton } from '../ui/skeleton'
 
 export function UserDropdown() {

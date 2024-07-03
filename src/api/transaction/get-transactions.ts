@@ -1,7 +1,8 @@
+import Cookies from 'js-cookie'
+
 import { api } from '@/lib/axios'
 import { TransactionsRequestQueryParams } from '@/schemas/application/transactions-request'
 import { TransactionsResponse } from '@/types/transaction'
-import Cookies from 'js-cookie'
 
 export async function getTransactions({
   description,

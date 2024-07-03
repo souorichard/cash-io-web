@@ -1,6 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+
 import { Sidebar, SidebarNav, SidebarNavLink } from './patterns/sidebar'
 
 export function SettingsSidebar() {

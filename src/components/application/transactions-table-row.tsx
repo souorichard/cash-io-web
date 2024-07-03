@@ -1,6 +1,16 @@
 'use client'
 
-import { TableCell, TableRow } from '../ui/table'
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+import { Ellipsis } from 'lucide-react'
+
+import { deleteTransaction } from '@/api/transaction/delete-transaction'
+import { cn } from '@/lib/utils'
+import { Transaction } from '@/types/transaction'
+import { translateCategory } from '@/utils/translate-category'
+
+import { AlertDialog, AlertDialogTrigger } from '../ui/alert-dialog'
+import { Button } from '../ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,16 +19,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import { AlertDialog, AlertDialogTrigger } from '../ui/alert-dialog'
-import { Button } from '../ui/button'
-import { Ellipsis } from 'lucide-react'
+import { TableCell, TableRow } from '../ui/table'
 import { DeleteAlertDialog } from './delete-alert-dialog'
-import { Transaction } from '@/types/transaction'
-import { cn } from '@/lib/utils'
-import { formatDistanceToNow } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
-import { deleteTransaction } from '@/api/transaction/delete-transaction'
-import { translateCategory } from '@/utils/translate-category'
 
 interface TransactionsTableRowProps {
   transaction: Transaction

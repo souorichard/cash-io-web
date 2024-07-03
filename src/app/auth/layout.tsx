@@ -1,10 +1,11 @@
+import { PropsWithChildren } from 'react'
+
 import {
   Logo,
   LogoEmblem,
   LogoName,
 } from '@/components/application/patterns/logo'
 import { AuthPage } from '@/components/authentication/page'
-import { PropsWithChildren } from 'react'
 
 export default function AuthLayout({ children }: PropsWithChildren) {
   return (

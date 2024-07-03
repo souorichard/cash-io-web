@@ -1,7 +1,8 @@
+import { Ellipsis } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TableCell, TableRow } from '@/components/ui/table'
-import { Ellipsis } from 'lucide-react'
 
 export function TransactionsTableSkeleton() {
   return (

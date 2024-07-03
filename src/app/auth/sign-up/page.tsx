@@ -1,4 +1,6 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
+
 import {
   AuthPageContent,
   AuthPageDescription,
@@ -8,7 +10,6 @@ import {
 import { SignUpForm } from '@/components/authentication/sign-up-form'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Cadastro',

@@ -1,6 +1,7 @@
+import Cookies from 'js-cookie'
+
 import { api } from '@/lib/axios'
 import { AddTransactionData } from '@/schemas/application/transactions-request'
-import Cookies from 'js-cookie'
 
 export async function addTransaction({
   description,

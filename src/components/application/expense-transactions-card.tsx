@@ -1,10 +1,12 @@
 'use client'
 
-import { Loader2, TrendingDown } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
+import { Loader2, TrendingDown } from 'lucide-react'
+
 import { getExpenseTransactions } from '@/api/analytics/get-expense-transactions'
+import { cn } from '@/lib/utils'
+
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { SkeletonCard } from './skeletons/skeleton-card'
 
 interface ExpenseTransactionsCardProps {

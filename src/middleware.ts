@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+
 import { getUrl } from './utils/get-url'
 
 export function middleware(request: NextRequest) {

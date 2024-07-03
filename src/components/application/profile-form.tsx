@@ -1,18 +1,20 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+
+import { getProfile } from '@/api/user/get-profile'
+import { updateProfile } from '@/api/user/update-profile'
+import { ProfileFormData, profileSchema } from '@/schemas/application/profile'
+import { User } from '@/types/user'
+
+import { Button } from '../ui/button'
+import { CardContent, CardFooter } from '../ui/card'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
-import { ProfileFormData, profileSchema } from '@/schemas/application/profile'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { CardContent, CardFooter } from '../ui/card'
-import { Button } from '../ui/button'
 import ErrorLabel from './error-label'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { getProfile } from '@/api/user/get-profile'
-import { User } from '@/types/user'
-import { updateProfile } from '@/api/user/update-profile'
-import { toast } from 'sonner'
 
 export function ProfileForm() {
   const queryClient = useQueryClient()

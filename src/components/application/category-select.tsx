@@ -1,8 +1,10 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { SelectContent, SelectGroup, SelectItem } from '../ui/select'
+
 import { getCategories } from '@/api/mocks/categories'
+
+import { SelectContent, SelectGroup, SelectItem } from '../ui/select'
 
 interface CategorySelectProps {
   onDefaultValue?: boolean

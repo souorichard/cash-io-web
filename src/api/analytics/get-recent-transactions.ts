@@ -1,6 +1,7 @@
+import Cookies from 'js-cookie'
+
 import { api } from '@/lib/axios'
 import { TransactionWithOwner } from '@/types/transaction'
-import Cookies from 'js-cookie'
 
 export async function getRecentTransactions() {
   const response = await api.get<TransactionWithOwner[]>(

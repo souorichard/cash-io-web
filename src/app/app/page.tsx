@@ -1,15 +1,16 @@
 import { Metadata } from 'next'
+
+import { ExpenseTransactionsCard } from '@/components/application/expense-transactions-card'
 import {
   ApplicationPage,
   ApplicationPageContent,
   ApplicationPageHeader,
   ApplicationPageTitle,
 } from '@/components/application/patterns/page'
-import { ExpenseTransactionsCard } from '@/components/application/expense-transactions-card'
+import { RecentTransactionsCard } from '@/components/application/recent-transactions-card'
 import { RevenueTransactionsCard } from '@/components/application/revenue-transactions-card'
 import { TotalBalanceCard } from '@/components/application/total-balance-card'
 import { TransactionsInPeriodCard } from '@/components/application/transactions-in-period-card'
-import { RecentTransactionsCard } from '@/components/application/recent-transactions-card'
 
 export const metadata: Metadata = {
   title: 'Dashboard',

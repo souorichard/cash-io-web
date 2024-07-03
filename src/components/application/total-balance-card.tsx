@@ -1,10 +1,12 @@
 'use client'
 
-import { Loader2, Wallet2 } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
+import { Loader2, Wallet2 } from 'lucide-react'
+
 import { getTotalBalance } from '@/api/analytics/get-total-balance'
+import { cn } from '@/lib/utils'
+
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { SkeletonCard } from './skeletons/skeleton-card'
 
 interface TotalBalanceCardProps {

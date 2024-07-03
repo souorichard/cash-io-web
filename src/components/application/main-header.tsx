@@ -1,6 +1,11 @@
 'use client'
 
+import { ArrowDownUp, LayoutDashboard, Settings } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
+import { Separator } from '../ui/separator'
+import { ModeToggle } from './mode-toggle'
 import {
   Header,
   HeaderActions,
@@ -9,11 +14,7 @@ import {
   HeaderNavLink,
 } from './patterns/header'
 import { LogoEmblem } from './patterns/logo'
-import { Separator } from '../ui/separator'
-import { ArrowDownUp, Settings, LayoutDashboard } from 'lucide-react'
-import { usePathname } from 'next/navigation'
 import { UserDropdown } from './user-dropdown'
-import { ModeToggle } from './mode-toggle'
 
 export function MainHeader() {
   const pathname = usePathname()

@@ -1,15 +1,5 @@
 'use client'
 
-import { cn } from '@/lib/utils'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '../ui/card'
-import { Label } from '../ui/label'
-import { DatePickerWithRange } from './date-picker-with-range'
 import {
   CartesianGrid,
   Line,
@@ -21,6 +11,18 @@ import {
   YAxis,
 } from 'recharts'
 import { violet } from 'tailwindcss/colors'
+
+import { cn } from '@/lib/utils'
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../ui/card'
+import { Label } from '../ui/label'
+import { DatePickerWithRange } from './date-picker-with-range'
 
 const data = [
   {

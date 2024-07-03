@@ -1,6 +1,7 @@
-import { api } from '@/lib/axios'
-import { User, UpdateUser } from '@/types/user'
 import Cookies from 'js-cookie'
+
+import { api } from '@/lib/axios'
+import { UpdateUser, User } from '@/types/user'
 
 export async function updateProfile({
   name,
