@@ -8,3 +8,10 @@ export interface User {
   createdAt: Date
   updatedAt: Date
 }
+
+export interface UpdateUser {
+  name: string
+  email: string
+  phone: string
+  teamName: string
+}

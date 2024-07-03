@@ -17,12 +17,12 @@ export function SettingsSidebar() {
           Perfil
         </SidebarNavLink>
 
-        <SidebarNavLink
+        {/* <SidebarNavLink
           path="/app/settings/team"
           active={isActive('/app/settings/team')}
         >
           Equipe
-        </SidebarNavLink>
+        </SidebarNavLink> */}
 
         <SidebarNavLink
           path="/app/settings/billing"
