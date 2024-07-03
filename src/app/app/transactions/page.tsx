@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import {
   ApplicationPage,
   ApplicationPageContent,
@@ -5,6 +6,10 @@ import {
   ApplicationPageTitle,
 } from '@/components/application/patterns/page'
 import { TransactionsTable } from '@/components/application/transactions-table'
+
+export const metadata: Metadata = {
+  title: 'Transações',
+}
 
 export default function TransactionsPage() {
   return (

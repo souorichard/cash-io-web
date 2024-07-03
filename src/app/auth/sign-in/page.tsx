@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import {
   AuthPageContent,
   AuthPageDescription,
@@ -8,6 +9,10 @@ import { SignInForm } from '@/components/authentication/sign-in-form'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'Acesso',
+}
 
 export default function SignIn() {
   return (

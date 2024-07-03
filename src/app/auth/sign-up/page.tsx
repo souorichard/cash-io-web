@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import {
   AuthPageContent,
   AuthPageDescription,
@@ -8,6 +9,10 @@ import { SignUpForm } from '@/components/authentication/sign-up-form'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'Cadastro',
+}
 
 export default function SignUp() {
   return (

@@ -48,8 +48,8 @@ export function SignInForm() {
 
       const response = await loginUser(data)
 
-      Cookies.set('userId', response.id, { expires: 3 })
-      Cookies.set('token', response.token, { expires: 3 })
+      Cookies.set('userId', response.id, { expires: 1 })
+      Cookies.set('token', response.token, { expires: 1 })
 
       toast.success('Aguarde, redirecionando para o sistema...')
     } catch (err) {

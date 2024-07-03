@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import {
   ApplicationPage,
   ApplicationPageContent,
@@ -9,6 +10,10 @@ import { RevenueTransactionsCard } from '@/components/application/revenue-transa
 import { TotalBalanceCard } from '@/components/application/total-balance-card'
 import { TransactionsInPeriodCard } from '@/components/application/transactions-in-period-card'
 import { RecentTransactionsCard } from '@/components/application/recent-transactions-card'
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+}
 
 export default function DashboardPage() {
   return (
