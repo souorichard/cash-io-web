@@ -6,7 +6,7 @@ import { ChevronDown, CircleUser, CreditCard, LogOut } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { getProfile } from '@/api/user/get-profile'
+import { getTeam } from '@/api/team/get-team'
 import { cn } from '@/lib/utils'
 
 import { Button } from '../ui/button'
@@ -26,9 +26,9 @@ export function UserDropdown() {
 
   const [isOpen, setIsOpen] = useState(false)
 
-  const { data: profile, isLoading: isLoadingProfile } = useQuery({
-    queryKey: ['me'],
-    queryFn: getProfile,
+  const { data: team, isLoading: isLoadingTeam } = useQuery({
+    queryKey: ['team'],
+    queryFn: getTeam,
     staleTime: Infinity,
   })
 
@@ -43,11 +43,7 @@ export function UserDropdown() {
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="min-w-48 justify-start gap-2">
-          {isLoadingProfile ? (
-            <Skeleton className="w-full h-4" />
-          ) : (
-            profile?.teamName
-          )}
+          {isLoadingTeam ? <Skeleton className="w-full h-4" /> : team?.name}
           <ChevronDown
             className={cn(
               'size-4 ml-auto transition-all',
