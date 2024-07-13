@@ -45,30 +45,34 @@ export function RecentTransactionsCard({
         )}
 
         {recentTransactions &&
-          recentTransactions?.map((transaction) => (
-            <div key={transaction.id} className="flex items-center gap-2">
-              <Avatar className="size-10">
-                <AvatarFallback>
-                  {getInitials(transaction.createdBy.name)}
-                </AvatarFallback>
-              </Avatar>
-              <div className="space-y-0.5">
-                <b className="text-sm font-medium">
-                  {transaction.createdBy.name}
+          recentTransactions?.map((transaction) => {
+            const amount = transaction.amount_in_cents / 100
+
+            return (
+              <div key={transaction.id} className="flex items-center gap-2">
+                <Avatar className="size-10">
+                  <AvatarFallback>
+                    {getInitials(transaction.created_by.name)}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="space-y-0.5">
+                  <b className="text-sm font-medium">
+                    {transaction.created_by.name}
+                  </b>
+                  <p className="text-xs text-muted-foreground">
+                    {transaction.created_by.email}
+                  </p>
+                </div>
+                <b className="ml-auto text-sm font-semibold">
+                  {transaction.type === 'EXPENSE' ? '- ' : '+ '}
+                  {amount.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
                 </b>
-                <p className="text-xs text-muted-foreground">
-                  {transaction.createdBy.email}
-                </p>
               </div>
-              <b className="ml-auto text-sm font-semibold">
-                {transaction.type === 'EXPENSE' ? '- ' : '+ '}
-                {transaction.amount.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                })}
-              </b>
-            </div>
-          ))}
+            )
+          })}
 
         {recentTransactions && recentTransactions.length === 0 && (
           <div className="w-full h-[240px] flex justify-center items-center text-sm text-muted-foreground">

@@ -20,7 +20,7 @@ export function TotalBalanceCard({ className }: TotalBalanceCardProps) {
     refetchOnWindowFocus: false,
   })
 
-  const balance = totalBalance?.balance ? totalBalance?.balance : 0
+  const balance = totalBalance?.balance ? totalBalance?.balance / 100 : 0
 
   return (
     <Card className={cn('bg-card-foreground', className)}>
