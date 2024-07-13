@@ -25,6 +25,14 @@ export function ExpenseTransactionsCard({
     refetchOnWindowFocus: false,
   })
 
+  const transactions = expenseTransactions?.transactions
+    ? expenseTransactions?.transactions / 100
+    : 0
+
+  const diffFromLastMonth = expenseTransactions?.diffFromLastMonth
+    ? expenseTransactions?.diffFromLastMonth
+    : 0
+
   return (
     <Card className={cn('', className)}>
       <CardHeader className="pb-3 flex-row items-center">
@@ -41,14 +49,20 @@ export function ExpenseTransactionsCard({
         ) : (
           <>
             <b className="text-2xl font-bold">
-              {expenseTransactions?.toLocaleString('pt-BR', {
+              {transactions.toLocaleString('pt-BR', {
                 style: 'currency',
                 currency: 'BRL',
               })}
             </b>
             <p className="mt-1 text-xs text-muted-foreground">
-              <span className="text-emerald-600">-20%</span> em relação ao mês
-              passado
+              <span
+                className={
+                  diffFromLastMonth < 0 ? 'text-red-600' : 'text-emerald-600'
+                }
+              >
+                {diffFromLastMonth}%
+              </span>{' '}
+              em relação ao mês passado
             </p>
           </>
         )}
