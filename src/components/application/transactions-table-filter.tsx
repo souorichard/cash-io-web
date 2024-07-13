@@ -62,7 +62,7 @@ export function TransactionsTableFilter() {
     })
   }
 
-  const hasAnyFilter = !!description || category !== 'all'
+  const hasAnyFilter = !!description || !!category
 
   return (
     <div className="flex items-center gap-5">
