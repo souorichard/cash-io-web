@@ -46,12 +46,11 @@ export function SignInForm() {
 
   async function onSubmit(data: SignInFormData) {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      const { memberId, teamId, token } = await loginUser(data)
 
-      const response = await loginUser(data)
-
-      Cookies.set('userId', response.id, { expires: 1 })
-      Cookies.set('token', response.token, { expires: 1 })
+      Cookies.set('memberId', memberId, { expires: 1 })
+      Cookies.set('teamId', teamId, { expires: 1 })
+      Cookies.set('token', token, { expires: 1 })
 
       toast.success('Aguarde, redirecionando para o sistema...')
     } catch (err) {
@@ -91,9 +90,9 @@ export function SignInForm() {
             className="absolute top-0 right-0"
           >
             {!isOcult ? (
-              <Eye className="size-4" />
+              <Eye className="size-5" />
             ) : (
-              <EyeOff className="size-4" />
+              <EyeOff className="size-5" />
             )}
           </Button>
         </div>

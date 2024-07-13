@@ -36,8 +36,6 @@ export function SignUpForm() {
 
   async function onSubmit(data: SignUpFormData) {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-
       await registerUser(data)
 
       const email = data.email
@@ -79,7 +77,7 @@ export function SignUpForm() {
         {errors.email && <ErrorLabel>{errors.email.message}</ErrorLabel>}
       </fieldset>
 
-      <fieldset className="col-span-1 space-y-0.5">
+      <fieldset className="col-span-full space-y-0.5">
         <Label htmlFor="password">Senha</Label>
         <div className="relative">
           <Input
@@ -96,23 +94,13 @@ export function SignUpForm() {
             className="absolute top-0 right-0"
           >
             {!isOcult ? (
-              <Eye className="size-4" />
+              <Eye className="size-5" />
             ) : (
-              <EyeOff className="size-4" />
+              <EyeOff className="size-5" />
             )}
           </Button>
         </div>
         {errors.password && <ErrorLabel>{errors.password.message}</ErrorLabel>}
-      </fieldset>
-
-      <fieldset className="col-span-1 space-y-0.5">
-        <Label htmlFor="phone">Celular</Label>
-        <Input
-          id="phone"
-          placeholder="Digite seu celular"
-          {...register('phone')}
-        />
-        {errors.phone && <ErrorLabel>{errors.phone.message}</ErrorLabel>}
       </fieldset>
 
       <Button type="submit" disabled={isSubmitting} className="col-span-full">

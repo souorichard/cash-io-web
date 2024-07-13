@@ -5,8 +5,17 @@ interface SignInRequest {
   password: string
 }
 
+interface SignInResponse {
+  memberId: string
+  teamId: string
+  token: string
+}
+
 export async function signIn({ email, password }: SignInRequest) {
-  const response = await api.post('/sign-in', { email, password })
+  const response = await api.post<SignInResponse>('/sign-in', {
+    email,
+    password,
+  })
 
   return response.data
 }
