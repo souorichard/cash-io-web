@@ -5,10 +5,9 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-import { getProfile } from '@/api/user/get-profile'
-import { updateProfile } from '@/api/user/update-profile'
+import { getMember, Member } from '@/api/member/get-member'
+import { updateMember } from '@/api/member/update-member'
 import { ProfileFormData, profileSchema } from '@/schemas/application/profile'
-import { User } from '@/types/user'
 
 import { Button } from '../ui/button'
 import { CardContent, CardFooter } from '../ui/card'
@@ -16,12 +15,16 @@ import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import ErrorLabel from './error-label'
 
+interface UpdateProfileFormData {
+  name?: string
+}
+
 export function ProfileForm() {
   const queryClient = useQueryClient()
 
   const { data: profile, isLoading: isLoadingProfile } = useQuery({
-    queryKey: ['me'],
-    queryFn: getProfile,
+    queryKey: ['member'],
+    queryFn: getMember,
     staleTime: Infinity,
   })
 
@@ -33,27 +36,17 @@ export function ProfileForm() {
     resolver: zodResolver(profileSchema),
     values: {
       name: profile?.name ?? '',
-      teamName: profile?.teamName ?? '',
       email: profile?.email ?? '',
-      phone: profile?.phone ?? '',
     },
   })
 
-  function updateProfileDataOnCache({
-    name,
-    email,
-    phone,
-    teamName,
-  }: ProfileFormData) {
-    const cached = queryClient.getQueryData<User>(['me'])
+  function updateProfileDataOnCache({ name }: UpdateProfileFormData) {
+    const cached = queryClient.getQueryData<Member>(['profile'])
 
     if (cached) {
-      queryClient.setQueryData<User>(['me'], {
+      queryClient.setQueryData<Member>(['profile'], {
         ...cached,
         name,
-        email,
-        phone,
-        teamName,
       })
     }
 
@@ -61,14 +54,9 @@ export function ProfileForm() {
   }
 
   const { mutateAsync: updateProfileFn } = useMutation({
-    mutationFn: updateProfile,
-    onMutate: ({ name, email, phone, teamName }) => {
-      const { cached } = updateProfileDataOnCache({
-        name,
-        email,
-        phone,
-        teamName,
-      })
+    mutationFn: updateMember,
+    onMutate: ({ name }) => {
+      const { cached } = updateProfileDataOnCache({ name })
 
       return { previousProfile: cached }
     },
@@ -93,7 +81,7 @@ export function ProfileForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <CardContent>
         <div className="grid grid-cols-4 gap-x-2 gap-y-4">
-          <fieldset className="col-span-3 space-y-0.5">
+          <fieldset className="col-span-full space-y-0.5">
             <Label htmlFor="name">Nome</Label>
             <Input
               id="name"
@@ -103,36 +91,10 @@ export function ProfileForm() {
             {errors.name && <ErrorLabel>{errors.name.message}</ErrorLabel>}
           </fieldset>
 
-          <fieldset className="col-span-1 space-y-0.5">
-            <Label htmlFor="name">Equipe</Label>
-            <Input
-              id="teamName"
-              disabled={isLoadingProfile}
-              {...register('teamName')}
-            />
-            {errors.teamName && (
-              <ErrorLabel>{errors.teamName.message}</ErrorLabel>
-            )}
-          </fieldset>
-
-          <fieldset className="col-span-3 space-y-0.5">
+          <fieldset className="col-span-full space-y-0.5">
             <Label htmlFor="email">E-mail</Label>
-            <Input
-              id="email"
-              disabled={isLoadingProfile}
-              {...register('email')}
-            />
+            <Input id="email" readOnly disabled {...register('email')} />
             {errors.email && <ErrorLabel>{errors.email.message}</ErrorLabel>}
-          </fieldset>
-
-          <fieldset className="col-span-1 space-y-0.5">
-            <Label htmlFor="phone">Celular</Label>
-            <Input
-              id="phone"
-              disabled={isLoadingProfile}
-              {...register('phone')}
-            />
-            {errors.phone && <ErrorLabel>{errors.phone.message}</ErrorLabel>}
           </fieldset>
         </div>
       </CardContent>

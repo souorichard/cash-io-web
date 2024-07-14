@@ -2,19 +2,16 @@ import Cookies from 'js-cookie'
 
 import { api } from '@/lib/axios'
 
-export interface Member {
-  id: string
+export interface UpdateMemberProps {
   name?: string
-  email: string
-  is_owner: boolean
-  is_confirmed: boolean
-  team_id: string
-  created_at: Date
 }
 
-export async function getMember() {
-  const response = await api.get<Member>(
+export async function updateMember({ name }: UpdateMemberProps) {
+  const response = await api.put(
     `/members/${Cookies.get('memberId')}`,
+    {
+      name,
+    },
     {
       headers: {
         Authorization: `Bearer ${Cookies.get('token')}`,
