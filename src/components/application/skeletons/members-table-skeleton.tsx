@@ -7,7 +7,7 @@ import { TableCell, TableRow } from '@/components/ui/table'
 export function MembersTableSkeleton() {
   return (
     <>
-      {Array.from({ length: 4 }).map((_, i) => (
+      {Array.from({ length: 3 }).map((_, i) => (
         <TableRow key={i}>
           <TableCell>
             <Skeleton className="w-full h-4" />

@@ -2,10 +2,11 @@
 
 import { useQuery } from '@tanstack/react-query'
 import Cookies from 'js-cookie'
-import { ChevronDown, CircleUser, CreditCard, LogOut } from 'lucide-react'
+import { ChevronDown, CircleUser, LogOut, Users } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+import { getMember } from '@/api/member/get-member'
 import { getTeam } from '@/api/team/get-team'
 import { cn } from '@/lib/utils'
 
@@ -32,6 +33,12 @@ export function UserDropdown() {
     staleTime: Infinity,
   })
 
+  const { data: member, isLoading: isLoadingMember } = useQuery({
+    queryKey: ['member'],
+    queryFn: getMember,
+    staleTime: Infinity,
+  })
+
   function signOut() {
     Cookies.remove('userId')
     Cookies.remove('token')
@@ -43,7 +50,11 @@ export function UserDropdown() {
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="min-w-48 justify-start gap-2">
-          {isLoadingTeam ? <Skeleton className="w-full h-4" /> : team?.name}
+          {isLoadingTeam ? (
+            <Skeleton className="w-full h-4" />
+          ) : (
+            <span className="truncate">{team?.name}</span>
+          )}
           <ChevronDown
             className={cn(
               'size-4 ml-auto transition-all',
@@ -53,7 +64,9 @@ export function UserDropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel>Menu</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          {isLoadingMember ? <Skeleton className="w-full h-4" /> : member?.name}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
@@ -62,12 +75,14 @@ export function UserDropdown() {
           >
             <CircleUser className="size-4 mr-2" /> Meu perfil
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => push('/settings/billing')}
-            className="cursor-pointer"
-          >
-            <CreditCard className="size-4 mr-2" /> Assinatura
-          </DropdownMenuItem>
+          {member?.is_owner && (
+            <DropdownMenuItem
+              onClick={() => push('/settings/team')}
+              className="cursor-pointer"
+            >
+              <Users className="size-4 mr-2" /> Equipe
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem

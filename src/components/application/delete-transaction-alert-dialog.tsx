@@ -6,7 +6,6 @@ import { deleteTransaction } from '@/api/transaction/delete-transaction'
 import { queryClient } from '@/lib/react-query'
 
 import {
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -38,11 +37,9 @@ export function DeleteTransactionAlertDialog({ id }: DeleteAlertDialogProps) {
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>Cancelar</AlertDialogCancel>
-        <AlertDialogAction asChild>
-          <Button variant="destructive" onClick={() => deleteTransactionFn(id)}>
-            Confirmar
-          </Button>
-        </AlertDialogAction>
+        <Button variant="destructive" onClick={() => deleteTransactionFn(id)}>
+          Confirmar
+        </Button>
       </AlertDialogFooter>
     </AlertDialogContent>
   )

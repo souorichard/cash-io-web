@@ -1,11 +1,20 @@
 'use client'
 
+import { useQuery } from '@tanstack/react-query'
 import { usePathname } from 'next/navigation'
+
+import { getMember } from '@/api/member/get-member'
 
 import { Sidebar, SidebarNav, SidebarNavLink } from './patterns/sidebar'
 
 export function SettingsSidebar() {
   const pathname = usePathname()
+
+  const { data: member } = useQuery({
+    queryKey: ['member'],
+    queryFn: getMember,
+    staleTime: Infinity,
+  })
 
   function isActive(path: string) {
     return pathname === path
@@ -18,12 +27,14 @@ export function SettingsSidebar() {
           Perfil
         </SidebarNavLink>
 
-        <SidebarNavLink
-          path="/app/settings/team"
-          active={isActive('/app/settings/team')}
-        >
-          Equipe
-        </SidebarNavLink>
+        {member?.is_owner && (
+          <SidebarNavLink
+            path="/app/settings/team"
+            active={isActive('/app/settings/team')}
+          >
+            Equipe
+          </SidebarNavLink>
+        )}
 
         {/* <SidebarNavLink
           path="/app/settings/billing"

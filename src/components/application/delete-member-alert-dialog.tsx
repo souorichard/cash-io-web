@@ -6,7 +6,6 @@ import { deleteMember } from '@/api/member/delete-member'
 import { queryClient } from '@/lib/react-query'
 
 import {
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -39,11 +38,9 @@ export function DeleteMemberAlertDialog({ id }: DeleteAlertDialogProps) {
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>Cancelar</AlertDialogCancel>
-        <AlertDialogAction asChild>
-          <Button variant="destructive" onClick={() => deleteMemberFn(id)}>
-            Confirmar
-          </Button>
-        </AlertDialogAction>
+        <Button variant="destructive" onClick={() => deleteMemberFn(id)}>
+          Confirmar
+        </Button>
       </AlertDialogFooter>
     </AlertDialogContent>
   )

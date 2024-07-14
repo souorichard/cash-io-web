@@ -60,6 +60,9 @@ export function ProfileForm() {
 
       return { previousProfile: cached }
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['member'] })
+    },
     onError(_, __, context) {
       if (context?.previousProfile) {
         updateProfileDataOnCache(context.previousProfile)
