@@ -40,7 +40,8 @@ export function UserDropdown() {
   })
 
   function signOut() {
-    Cookies.remove('userId')
+    Cookies.remove('memberId')
+    Cookies.remove('teamId')
     Cookies.remove('token')
 
     push('/auth/sign-in')
