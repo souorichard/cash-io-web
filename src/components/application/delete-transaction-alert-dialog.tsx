@@ -2,6 +2,7 @@
 
 import { useMutation } from '@tanstack/react-query'
 
+import { deleteTransaction } from '@/api/transaction/delete-transaction'
 import { queryClient } from '@/lib/react-query'
 
 import {
@@ -13,23 +14,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '../ui/alert-dialog'
+import { Button } from '../ui/button'
 
 interface DeleteAlertDialogProps {
-  dataId: string
-  title: string
-  description: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  mutation: (id: string) => Promise<any>
+  id: string
 }
 
-export function DeleteAlertDialog({
-  dataId,
-  title,
-  description,
-  mutation,
-}: DeleteAlertDialogProps) {
-  const { mutateAsync: deleteItem } = useMutation({
-    mutationFn: mutation,
+export function DeleteTransactionAlertDialog({ id }: DeleteAlertDialogProps) {
+  const { mutateAsync: deleteTransactionFn } = useMutation({
+    mutationFn: deleteTransaction,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] })
     },
@@ -38,13 +31,17 @@ export function DeleteAlertDialog({
   return (
     <AlertDialogContent>
       <AlertDialogHeader>
-        <AlertDialogTitle>{title}</AlertDialogTitle>
-        <AlertDialogDescription>{description}</AlertDialogDescription>
+        <AlertDialogTitle>Atenção!</AlertDialogTitle>
+        <AlertDialogDescription>
+          Tem certeza que deseja excluir esta transação?
+        </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>Cancelar</AlertDialogCancel>
-        <AlertDialogAction onClick={() => deleteItem(dataId)}>
-          Confirmar
+        <AlertDialogAction asChild>
+          <Button variant="destructive" onClick={() => deleteTransactionFn(id)}>
+            Confirmar
+          </Button>
         </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>

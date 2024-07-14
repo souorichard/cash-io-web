@@ -4,7 +4,6 @@ import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Ellipsis } from 'lucide-react'
 
-import { deleteTransaction } from '@/api/transaction/delete-transaction'
 import { Transaction } from '@/api/transaction/get-transactions'
 import { cn } from '@/lib/utils'
 import { translateCategory } from '@/utils/translate-category'
@@ -20,7 +19,7 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
 import { TableCell, TableRow } from '../ui/table'
-import { DeleteAlertDialog } from './delete-alert-dialog'
+import { DeleteTransactionAlertDialog } from './delete-transaction-alert-dialog'
 
 interface TransactionsTableRowProps {
   transaction: Transaction
@@ -70,12 +69,7 @@ export function TransactionsTableRow({
               </AlertDialogTrigger>
             </DropdownMenuContent>
           </DropdownMenu>
-          <DeleteAlertDialog
-            dataId={transaction.id}
-            title="Atenção!"
-            description="Tem certeza que deseja excluir esta transação?"
-            mutation={deleteTransaction}
-          />
+          <DeleteTransactionAlertDialog id={transaction.id} />
         </AlertDialog>
       </TableCell>
     </TableRow>
