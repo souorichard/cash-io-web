@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-export default function MyProfile() {
+export default function ProfilePage() {
   return (
     <div>
       <Card>

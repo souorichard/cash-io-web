@@ -68,7 +68,7 @@ export function TransactionsTable() {
 
             {result && result.transactions.length === 0 && (
               <TableRow>
-                <TableCell colSpan={5} className="py-10 text-muted-foreground">
+                <TableCell colSpan={6} className="py-10 text-muted-foreground">
                   <div className="flex justify-center items-center">
                     <AlertCircle className="size-4 mr-2" />
                     Nenhum resultado encontrado.
