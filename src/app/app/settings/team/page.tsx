@@ -1,8 +1,6 @@
-import { Plus } from 'lucide-react'
-
+import { InviteGuestsDialog } from '@/components/application/invite-guests-dialog'
 import { MembersTable } from '@/components/application/members-table'
 import { TeamForm } from '@/components/application/team-form'
-import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -36,15 +34,7 @@ export default function TeamPage() {
           <MembersTable />
         </CardContent>
         <CardFooter>
-          <Button
-            variant="outline"
-            className="ml-auto"
-            // disabled={isSubmitting || isLoadingProfile}
-          >
-            <Plus className="size-4 mr-2" />
-            {/* {isSubmitting ? 'Salvando...' : 'Salvar informações'} */}
-            Convidar membros
-          </Button>
+          <InviteGuestsDialog />
         </CardFooter>
       </Card>
     </div>
