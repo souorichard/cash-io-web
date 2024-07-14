@@ -1,7 +1,7 @@
 import { Plus } from 'lucide-react'
 
 import { MembersTable } from '@/components/application/members-table'
-import { ProfileForm } from '@/components/application/profile-form'
+import { TeamForm } from '@/components/application/team-form'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -22,7 +22,7 @@ export default function TeamPage() {
             Atualize as informações da sua equipe.
           </CardDescription>
         </CardHeader>
-        <ProfileForm />
+        <TeamForm />
       </Card>
 
       <Card>
