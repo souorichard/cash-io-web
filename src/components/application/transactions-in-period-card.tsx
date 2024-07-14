@@ -68,7 +68,7 @@ export function TransactionsInPeriodCard({
 
   const { data: dailyTransactionsInPeriod, error: dailyTransactionsError } =
     useQuery({
-      queryKey: ['analytics', 'daily-transactions-in-period'],
+      queryKey: ['analytics', 'daily-transactions-in-period', period],
       queryFn: () =>
         getDailyTransactionsInPeriod({
           from: period?.from,

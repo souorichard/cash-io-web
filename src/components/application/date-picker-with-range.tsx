@@ -2,6 +2,7 @@
 
 import { CalendarIcon } from '@radix-ui/react-icons'
 import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import * as React from 'react'
 import { DateRange } from 'react-day-picker'
 
@@ -41,11 +42,18 @@ export function DatePickerWithRange({
             {date?.from ? (
               date.to ? (
                 <>
-                  {format(date.from, 'LLL dd, y')} -{' '}
-                  {format(date.to, 'LLL dd, y')}
+                  {format(date.from, 'PPP', {
+                    locale: ptBR,
+                  })}{' '}
+                  -{' '}
+                  {format(date.to, 'PPP', {
+                    locale: ptBR,
+                  })}
                 </>
               ) : (
-                format(date.from, 'LLL dd, y')
+                format(date.from, 'PPP', {
+                  locale: ptBR,
+                })
               )
             ) : (
               <span>Pick a date</span>
