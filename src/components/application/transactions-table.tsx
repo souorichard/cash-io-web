@@ -50,6 +50,7 @@ export function TransactionsTable() {
               <TableHead className="w-[12rem]">Criada</TableHead>
               <TableHead>Descrição</TableHead>
               <TableHead className="w-[15rem]">Categoria</TableHead>
+              <TableHead className="w-[7.5rem]">Proprietário</TableHead>
               <TableHead className="w-[11.25rem] text-right">Valor</TableHead>
               <TableHead className="w-[8rem]"></TableHead>
             </TableRow>

@@ -5,8 +5,8 @@ import { ptBR } from 'date-fns/locale'
 import { Ellipsis } from 'lucide-react'
 
 import { deleteTransaction } from '@/api/transaction/delete-transaction'
+import { Transaction } from '@/api/transaction/get-transactions'
 import { cn } from '@/lib/utils'
-import { Transaction } from '@/types/transaction'
 import { translateCategory } from '@/utils/translate-category'
 
 import { AlertDialog, AlertDialogTrigger } from '../ui/alert-dialog'
@@ -29,23 +29,26 @@ interface TransactionsTableRowProps {
 export function TransactionsTableRow({
   transaction,
 }: TransactionsTableRowProps) {
+  const amountInReal = transaction.amount_in_cents / 100
+
   return (
     <TableRow>
       <TableCell>
-        {formatDistanceToNow(new Date(transaction.createdAt), {
+        {formatDistanceToNow(new Date(transaction.created_at), {
           locale: ptBR,
           addSuffix: true,
         })}
       </TableCell>
       <TableCell>{transaction.description}</TableCell>
       <TableCell>{translateCategory(transaction.category)}</TableCell>
+      <TableCell>{transaction.created_by.name.split(' ')[0]}</TableCell>
       <TableCell
         className={cn(
           'font-medium text-right',
           transaction.type === 'EXPENSE' ? 'text-red-600' : 'text-green-600',
         )}
       >
-        {transaction.amount.toLocaleString('pt-BR', {
+        {amountInReal.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL',
         })}
