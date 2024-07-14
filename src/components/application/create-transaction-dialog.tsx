@@ -6,7 +6,7 @@ import { CirclePlus, Loader2 } from 'lucide-react'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-import { addTransaction } from '@/api/transaction/add-transaction'
+import { createTransaction } from '@/api/transaction/create-transaction'
 import { queryClient } from '@/lib/react-query'
 
 import {
@@ -47,9 +47,9 @@ export function CreateTransactionDialog() {
     resolver: zodResolver(createTransactionSchema),
   })
 
-  const { mutateAsync: createTransaction } = useMutation({
+  const { mutateAsync: addTransaction } = useMutation({
     mutationKey: ['transactions'],
-    mutationFn: addTransaction,
+    mutationFn: createTransaction,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] })
     },
@@ -57,9 +57,7 @@ export function CreateTransactionDialog() {
 
   async function onSubmit(data: CreateTransactionFormData) {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-
-      await createTransaction(data)
+      await addTransaction(data)
 
       toast.success('Transação criada com sucesso!')
     } catch (err) {

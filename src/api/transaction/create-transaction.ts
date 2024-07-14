@@ -1,16 +1,22 @@
 import Cookies from 'js-cookie'
 
 import { api } from '@/lib/axios'
-import { AddTransactionData } from '@/schemas/application/transactions-request'
 
-export async function addTransaction({
+export interface CreateTransactionProps {
+  description: string
+  category: string
+  amount: number
+  type: string
+}
+
+export async function createTransaction({
   description,
   category,
   amount,
   type,
-}: AddTransactionData) {
+}: CreateTransactionProps) {
   const response = await api.post(
-    '/transactions',
+    `/team/${Cookies.get('teamId')}/transactions`,
     {
       description,
       category,
