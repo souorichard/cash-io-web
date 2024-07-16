@@ -71,14 +71,14 @@ export function UserDropdown() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
-            onClick={() => push('/settings')}
+            onClick={() => push('/app/settings')}
             className="cursor-pointer"
           >
             <CircleUser className="size-4 mr-2" /> Meu perfil
           </DropdownMenuItem>
           {member?.is_owner && (
             <DropdownMenuItem
-              onClick={() => push('/settings/team')}
+              onClick={() => push('/app/settings/team')}
               className="cursor-pointer"
             >
               <Users className="size-4 mr-2" /> Equipe
