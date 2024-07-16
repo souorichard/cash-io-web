@@ -13,12 +13,19 @@ export interface MembersResponse {
   }
 }
 
-export async function getMembers() {
+export interface MembersRequestQueryProps {
+  page?: number
+}
+
+export async function getMembers({ page }: MembersRequestQueryProps) {
   const response = await api.get<MembersResponse>(
     `/team/${Cookies.get('teamId')}/members`,
     {
       headers: {
         Authorization: `Bearer ${Cookies.get('token')}`,
+      },
+      params: {
+        page,
       },
     },
   )

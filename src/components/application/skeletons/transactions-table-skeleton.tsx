@@ -21,6 +21,9 @@ export function TransactionsTableSkeleton() {
           <TableCell>
             <Skeleton className="w-full h-4" />
           </TableCell>
+          <TableCell>
+            <Skeleton className="w-full h-4" />
+          </TableCell>
           <TableCell className="flex justify-center items-center">
             <Button size="icon" variant="ghost" disabled>
               <Ellipsis className="size-4" />

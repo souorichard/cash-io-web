@@ -2,6 +2,8 @@
 
 import { useQuery } from '@tanstack/react-query'
 import { AlertCircle } from 'lucide-react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { z } from 'zod'
 
 import { getMembers } from '@/api/member/get-members'
 import {
@@ -14,13 +16,31 @@ import {
 } from '@/components/ui/table'
 
 import { MembersTableRow } from './members-table-row'
+import { Pagination } from './pagination'
 import { MembersTableSkeleton } from './skeletons/members-table-skeleton'
 
 export function MembersTable() {
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const { replace } = useRouter()
+
+  const page = z.coerce
+    .number()
+    .transform((pageIndex) => pageIndex - 1)
+    .parse(searchParams.get('page') ?? '1')
+
   const { data: result, isLoading: isLoadingMembers } = useQuery({
     queryKey: ['members'],
-    queryFn: getMembers,
+    queryFn: () => getMembers({ page }),
   })
+
+  function handlePaginate(page: number) {
+    const params = new URLSearchParams(searchParams)
+
+    params.set('page', (page + 1).toString())
+
+    replace(`${pathname}?${params.toString()}`)
+  }
 
   return (
     <div className="space-y-3">
@@ -54,6 +74,15 @@ export function MembersTable() {
           </TableBody>
         </Table>
       </div>
+
+      {result && (
+        <Pagination
+          pageIndex={page}
+          totalCount={result.meta.total}
+          perPage={result.meta.perPage}
+          onPageChange={handlePaginate}
+        />
+      )}
     </div>
   )
 }

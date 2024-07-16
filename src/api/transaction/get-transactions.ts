@@ -26,7 +26,7 @@ export interface TransactionsResponse {
 export interface TransactionsRequestQueryProps {
   description?: string
   category?: string
-  page?: string
+  page?: number
 }
 
 export async function getTransactions({
