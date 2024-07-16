@@ -17,7 +17,7 @@ import { MembersTableRow } from './members-table-row'
 import { MembersTableSkeleton } from './skeletons/members-table-skeleton'
 
 export function MembersTable() {
-  const { data: members, isLoading: isLoadingMembers } = useQuery({
+  const { data: result, isLoading: isLoadingMembers } = useQuery({
     queryKey: ['members'],
     queryFn: getMembers,
   })
@@ -34,14 +34,14 @@ export function MembersTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {isLoadingMembers && !members && <MembersTableSkeleton />}
+            {isLoadingMembers && !result && <MembersTableSkeleton />}
 
-            {members &&
-              members.map((member) => (
+            {result &&
+              result.members.map((member) => (
                 <MembersTableRow key={member.id} member={member} />
               ))}
 
-            {members && members.length === 0 && (
+            {result && result.members.length === 0 && (
               <TableRow>
                 <TableCell colSpan={3} className="py-10 text-muted-foreground">
                   <div className="flex justify-center items-center">

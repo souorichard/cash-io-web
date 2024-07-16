@@ -8,7 +8,7 @@ import { TableCell, TableRow } from '../ui/table'
 import { DeleteMemberAlertDialog } from './delete-member-alert-dialog'
 
 interface MembersTableRowProps {
-  member: Member
+  member: Pick<Member, 'id' | 'name' | 'email' | 'is_owner'>
 }
 
 export function MembersTableRow({ member }: MembersTableRowProps) {
