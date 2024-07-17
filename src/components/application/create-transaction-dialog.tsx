@@ -37,6 +37,15 @@ import {
 import { CategorySelect } from './category-select'
 import ErrorLabel from './error-label'
 
+function monetaryMask(amount: HTMLInputElement) {
+  let changeValue = amount.value
+  changeValue = changeValue.replace(/\D/g, '') // Remove all non-digits
+  changeValue = changeValue.replace(/(\d+)(\d{2})$/, '$1,$2') // Add the cents part
+  changeValue = changeValue.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') // Add dots every three digits
+  changeValue = 'R$ ' + changeValue
+  amount.value = changeValue
+}
+
 export function CreateTransactionDialog() {
   const {
     control,
@@ -55,9 +64,21 @@ export function CreateTransactionDialog() {
     },
   })
 
-  async function onSubmit(data: CreateTransactionFormData) {
+  async function onSubmit({
+    description,
+    category,
+    amount,
+    type,
+  }: CreateTransactionFormData) {
     try {
-      await addTransaction(data)
+      const amountInCents = Number(amount.replace(/\D/g, ''))
+
+      await addTransaction({
+        description,
+        category,
+        amount: amountInCents,
+        type,
+      })
 
       toast.success('Transação criada com sucesso!')
     } catch (err) {
@@ -127,7 +148,8 @@ export function CreateTransactionDialog() {
             <Label htmlFor="amount">Valor</Label>
             <Input
               id="amount"
-              placeholder="Digite o valor"
+              placeholder="R$ 0,00"
+              onKeyUp={(e) => monetaryMask(e.target as HTMLInputElement)}
               {...register('amount')}
             />
             {errors.amount && <ErrorLabel>{errors.amount.message}</ErrorLabel>}

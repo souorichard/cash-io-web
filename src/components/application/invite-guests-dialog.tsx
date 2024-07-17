@@ -41,7 +41,7 @@ export function InviteGuestsDialog() {
     formState: { isSubmitting },
   } = useForm<InviteGuestFormData>()
 
-  const { mutateAsync: inviteGuests } = useMutation({
+  const { mutateAsync: inviteGuests, isPending: isInviting } = useMutation({
     mutationKey: ['invite-guests', emailsToInvite],
     mutationFn: inviteTeam,
   })
@@ -141,17 +141,21 @@ export function InviteGuestsDialog() {
               {...register('email')}
             />
             <Button type="submit" variant="secondary" disabled={isSubmitting}>
-              <Plus className="size-4 mr-2" />
-              Adicionar
+              {isSubmitting ? (
+                <Loader2 className="size-4 mr-2 animate-spin" />
+              ) : (
+                <Plus className="size-4 mr-2" />
+              )}
+              {isSubmitting ? 'Adicionando...' : 'Adicionar'}
             </Button>
             <Separator orientation="vertical" className="h-8" />
             <Button
               type="button"
-              disabled={emailsToInvite.length === 0 || isSubmitting}
+              disabled={emailsToInvite.length === 0 || isInviting}
               onClick={handleInviteGuests}
             >
-              {isSubmitting && <Loader2 className="size-4 mr-2 animate-spin" />}
-              {isSubmitting ? 'Convidando...' : 'Convidar'}
+              {isInviting && <Loader2 className="size-4 mr-2 animate-spin" />}
+              {isInviting ? 'Convidando...' : 'Convidar'}
             </Button>
           </form>
         </div>

@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 import { signIn } from '@/api/auth/sign-in'
+import { queryClient } from '@/lib/react-query'
 import { SignInFormData, signInSchema } from '@/schemas/auth/sign-in'
 
 import ErrorLabel from '../application/error-label'
@@ -40,6 +41,8 @@ export function SignInForm() {
   const { mutateAsync: loginUser } = useMutation({
     mutationFn: signIn,
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['member'] })
+
       router.push('/app')
     },
   })
